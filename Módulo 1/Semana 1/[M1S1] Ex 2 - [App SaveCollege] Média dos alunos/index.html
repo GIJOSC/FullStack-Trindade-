@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercicio 1</title>
+  </head>
+  <body>
+    <p>[M1S1] Ex 1 - [App SaveCollege]</p>
+  </body>
+  <script>
+    var aluno = [
+      {
+        name: "Gesiel Neves",
+        height: 1.82,
+        age: 44,
+        sex: "Masculino",
+        livingRoom: "Trindade",
+        matematica: 9,
+      },
+      {
+        name: "Daniel Luiz Martins Neves",
+        height: 1.62,
+        age: 22,
+        sex: "Masculino",
+        livingRoom: "Trindade",
+        matematica: 10,
+      },
+      {
+        name: "Emanuela Martins Neves",
+        height: 1.4,
+        age: 10,
+        sex: "Feminino",
+        livingRoom: "Trindade",
+        matematica: 8,
+      },
+      {
+        name: "Josiane Martins Neves",
+        height: 1.6,
+        age: 40,
+        sex: "Feminino",
+        livingRoom: "Trindade",
+        matematica: 7,
+      },
+      {
+        name: "Emily Neves",
+        height: 1.6,
+        age: 22,
+        sex: "Feminino",
+        livingRoom: "Trindade",
+        matematica: 10,
+      },
+    ];
+    console.log(aluno);
+
+    var Media =
+      (aluno[0].matematica +
+        aluno[1].matematica +
+        aluno[2].matematica +
+        aluno[3].matematica +
+        aluno[4].matematica) /
+      5;
+
+    console.log(`A média dos alunos é ${Media}`);
+  </script>
+</html>
