@@ -28,10 +28,12 @@ form.addEventListener("submit", (e) => {
 });
 
 function clicou() {
-  const db = JSON.parse(localStorage.getItem("dados"));
+  const dados = JSON.parse(localStorage.getItem("dados"));
 
   if (user.username === dados.usuario && user.password === dados.senha) {
-    location.href = "./login.html";
+    localStorage.setItem("acesso", true);
+    alert("Usuario autenticado!");
+    window.location.href = "./login.html";
   } else {
     alert("Credenciais Incorretas!");
   }
