@@ -1,44 +1,34 @@
-const user = {
-  username: "",
-  password: "",
+var user = {
+  username: "admin",
+  password: "123456",
 };
-const usuarioCorreto = {
-  usuario: "admin",
-  senha: "1234",
-};
-
-const username = document.getElementById("username");
-const password = document.getElementById("password");
-
-const handleChangeUserName = (e) => {
-  user.username = e.target.value;
-};
-const handleChangePassword = (e) => {
-  user.password = e.target.value;
-};
-
-username.addEventListener("change", handleChangeUserName);
-password.addEventListener("change", handleChangePassword);
-
-const form = document.querySelector("#form");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  clicou();
-});
 
 function clicou() {
-  const dados = JSON.parse(localStorage.getItem("dados"));
+  const login = document.getElementById("login");
+  const username = document.getElementById("user");
+  const password = document.getElementById("senha");
 
-  if (user.username === dados.usuario && user.password === dados.senha) {
-    localStorage.setItem("acesso", true);
-    alert("Usuario autenticado!");
-    window.location.href = "./login.html";
+  if (username.value == user.username && password.value == user.password) {
+    localStorage.setItem("userLocal", username.value);
+    localStorage.setItem("senhaLocal", password.value);
+    localStorage.estaLogado = true;
+    alert("Usuário logado e dados salvos no LocalStorage!");
+
+    location.href = "./logout.html";
   } else {
-    alert("Credenciais Incorretas!");
+    alert("Usuário não existe!");
   }
 }
 
-window.onload = () => {
-  localStorage.setItem("dados", JSON.stringify(usuarioCorreto));
-};
+function isLogged() {
+  if (localStorage.estaLogado) {
+    alert("Efetuado Logoff com sucesso!");
+    localStorage.removeItem("userLocal", "senhaLocal");
+    localStorage.setItem("estaLogado", false);
+    location.href = "./index.html";
+  } else {
+    alert("Usuário não existe! Faça o login novamente!");
+
+    location.href = "./login.html";
+  }
+}

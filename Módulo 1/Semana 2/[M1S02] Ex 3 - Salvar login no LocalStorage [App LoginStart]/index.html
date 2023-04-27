@@ -4,44 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login GIJO</title>
+    <title>[M1S02] Ex 3</title>
   </head>
-  <body
-    style="
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    "
-  >
-    <h1>Login</h1>
-    <form action="www.google.com.br" method="get">
-      <div style="display: flex; flex-direction: column; max-width: 300px">
-        <input
-          id="username"
-          style="padding: 10px; border-radius: 15px"
-          type="text"
-          placeholder="Usuário"
-        />
-        <input
-          id="password"
-          style="margin-top: 10px; padding: 10px; border-radius: 15px"
-          type="password"
-          placeholder="Senha"
-        />
-        <button
-          id="login"
-          onclick="{clicou()}"
-          style="
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 15px;
-            background-color: gray;
-          "
-          type="submit"
-        >
-          Login
-        </button>
-        <div id="test"></div>
-      </div>
-    </form>
+  <body>
+    <h1>[M1S02] Ex 3</h1>
+
+    <p>Insira informações de Login</p>
+
+    <input id="user" type="text" placeholder="usuario" />
+    <label for="user">Usuário</label>
+
+    <input id="senha" type="text" placeholder="senha" />
+    <label for="senha">Senha</label>
+
+    <button id="login" onclick="{clicou()}" type="submit">Logar</button>
+
+    <script src="./functions.js"></script>
   </body>
-  <script src="./function.js"></script>
 </html>
