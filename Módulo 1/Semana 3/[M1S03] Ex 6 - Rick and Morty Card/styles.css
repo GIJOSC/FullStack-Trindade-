@@ -1,0 +1,23 @@
+#perfil {
+  margin: 50px auto;
+  text-align: center;
+  width: 80%;
+}
+
+#avatar {
+  border-radius: 50%;
+  height: 200px;
+  margin: 0 auto;
+  width: 200px;
+}
+
+#nome {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 20px;
+  margin-top: 10px;
+}
