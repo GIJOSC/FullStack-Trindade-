@@ -2,6 +2,7 @@ const express = require("express");
 const connection = require("./src/database");
 const Place = require("./src/models/place");
 const { Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 
 // Exercício 1  - Iniciar o servidor
 const app = express();
@@ -105,6 +106,89 @@ app.delete("/places/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Não foi possivel concluir a operação" });
+  }
+});
+
+// Exercício 6 - Criado a rota update
+app.put("/places/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, contact, opening_hours, description, latitude, longitude } =
+      req.body;
+
+    const place = await Place.findByPk(id);
+
+    if (!place) {
+      return res.status(404).json({ message: "Instituição não encontrada." });
+    }
+
+    place.name = name;
+    place.contact = contact;
+    place.opening_hours = opening_hours;
+    place.description = description;
+    place.latitude = latitude;
+    place.longitude = longitude;
+
+    if (typeof place.name !== "string" || place.name.trim() === "") {
+      return res.status(400).json({ message: "Nome é obrigatório" });
+    }
+
+    if (typeof place.contact !== "string" || place.contact.trim() === "") {
+      return res.status(400).json({ message: "Contato é obrigatório" });
+    }
+
+    if (
+      typeof place.opening_hours !== "string" ||
+      place.opening_hours.trim() === ""
+    ) {
+      return res.status(400).json({ message: "Horário é obrigatório" });
+    }
+
+    if (
+      typeof place.description !== "string" ||
+      place.description.trim() === ""
+    ) {
+      return res.status(400).json({ message: "Descrição é obrigatório" });
+    }
+
+    if (typeof place.latitude !== "number" || isNaN(place.latitude)) {
+      return res.status(400).json({ message: "Latitude deve ser um número" });
+    }
+
+    if (typeof place.longitude !== "number" || isNaN(place.longitude)) {
+      return res.status(400).json({ message: "Longitude deve ser um número" });
+    }
+
+    const placeAlreadyExists = await Place.findOne({
+      where: {
+        [Op.and]: [
+          Sequelize.where(
+            Sequelize.fn("lower", Sequelize.col("name")),
+            Sequelize.fn("lower", place.name)
+          ),
+          {
+            id: {
+              [Op.ne]: id,
+            },
+          },
+        ],
+      },
+    });
+
+    if (placeAlreadyExists) {
+      return res.status(409).json({
+        message: "Informações duplicadas no banco de dados.",
+      });
+    }
+
+    const updatedPlace = await place.save();
+
+    res.json(updatedPlace);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Não foi possivel processar a solicitação!" });
   }
 });
 
