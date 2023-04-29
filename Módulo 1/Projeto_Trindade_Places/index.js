@@ -88,5 +88,25 @@ app.get("/places", async (req, res) => {
   }
 });
 
+// Exercício 5 - Criado rota delete
+app.delete("/places/:id", async (req, res) => {
+  try {
+    const { placeId } = req.params;
+
+    if (!placeId) {
+      return res.status(404).json({
+        message: "Lugar não encontrado no sistema!",
+      });
+    }
+
+    await Place.destroy({ where: { id: placeId } });
+
+    res.status(200).json({ message: "Lugar apagado com sucesso!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Não foi possivel concluir a operação" });
+  }
+});
+
 //Exercício 1 - Iniciar o Servidor
 app.listen(3333, () => console.log("Aplicação online na porta 3333!"));
