@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const connection = require("./src/database");
 const Place = require("./src/models/place");
