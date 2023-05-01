@@ -37,7 +37,7 @@ async function createUser(request, response) {
 
     response.status(200).json({ mensagem: "Criado com sucesso" });
 
-    response.status(201).json(user);
+    //response.status(201).json(user);
   } catch (error) {
     console.log(error);
     return response
